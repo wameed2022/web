@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CRM Dashboard - Mockup</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Optional: Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --brand-red: #b6322d;
+      --brand-teal: #0f7a86;
+      --brand-gray: #e9e7e5;
+      --card-bg: #ffffff;
+    }
+    body{
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:#f4f6f8;
+      color:#222;
+      padding-top: 120px; /* مساحة للـ Navbar والـ Topbar */
+    }
+
+    /* Navbar ثابت */
+    .navbar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1030;
+      background: white;
+    }
+
+    /* Topbar ثابت */
+    .topbar-fixed {
+      position: fixed;
+      top: 60px; /* ارتفاع الـ Navbar */
+      left: 0;
+      right: 0;
+      z-index: 1020;
+      background: white;
+    }
+
+    /* Sidebar ثابت */
+    .sidebar-fixed {
+      position: fixed;
+      left: 0;
+      top: 120px; /* ارتفاع الـ Navbar + الـ Topbar */
+      bottom: 0;
+      width: 25%;
+      overflow-y: auto;
+      z-index: 1010;
+    }
+
+    /* المحتوى الرئيسي */
+    .main-content-fixed {
+      margin-left: 25%;
+      padding-top: 20px;
+    }
+
+    /* تصميمات الـ Sidebar الأصلية */
+    .sidebar {
+      min-height: 100vh;
+      background: linear-gradient(180deg,#ffffff 0%, #f8f9fa 100%);
+      border-right: 1px solid #ddd;
+      padding-top: 12px;
+    }
+    .side-section-title {
+      background: var(--brand-red);
+      color: #fff;
+      padding: .45rem .75rem;
+      font-weight: 600;
+    }
+
+    /* Top tabs / icons */
+    .top-tabs .nav-link {
+      color:#222;
+      font-size: .9rem;
+      padding: .4rem .65rem;
+    }
+    .top-tabs .nav-link.active {
+      background:#0f7a86;
+      color:#fff;
+      border-radius: .25rem;
+    }
+
+    /* Cards */
+    .card-ghost {
+      background: linear-gradient(180deg,#fff 0%, #fbfbfb 100%);
+      border:1px solid #e6e6e6;
+      border-radius: 6px;
+      margin-bottom: 15px;
+    }
+
+    .billing-banner {
+      background: #b6322d;
+      color: #fff;
+      padding: .6rem .9rem;
+      font-weight: 700;
+    }
+
+    /* small badges like status */
+    .status-badge {
+      background:#f1f1f1;
+      border-radius: 4px;
+      padding: .25rem .5rem;
+      font-size:.85rem;
+      border:1px solid #e2e2e2;
+      display: inline-block;
+      margin-top: 5px;
+    }
+
+    /* Status badges colors */
+    .active-status { background-color: #28a745; color: white; }
+    .installed-status { background-color: #ffc107; color: #333; }
+    .verified-status { background-color: #007bff; color: white; }
+    .closed-status { background-color: #6c757d; color: white; }
+
+    /* tables */
+    .table thead th {
+      background: #f7f8f9;
+      font-weight: 600;
+      border-bottom: 1px solid #e6e6e6;
+    }
+
+    /* footer / usage summary */
+    .usage-summary {
+      background: #f2f6f7;
+      padding: .6rem;
+      border-radius: 4px;
+      border:1px solid #e7e7e7;
+      font-weight:600;
+    }
+
+    /* Gauges */
+    .gauge-container {
+      width: 100px;
+      height: 50px;
+      margin: 10px auto 5px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 100px 100px 0 0;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+    }
+    .gauge-fill {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      border-radius: 50%;
+      background-color: #dc3545;
+      transform-origin: 50% 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+    .gauge-container::after {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 45px;
+      background-color: #fff;
+      border-radius: 90px 90px 0 0;
+    }
+    .gauge-text {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* تحسينات شريط التنقل العلوي */
+    .topbar {
+        background-color: #ffffff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 10px 0;
+    }
+
+    .top-tabs .nav-link {
+        color: #6c757d;
+        font-weight: 500;
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin: 0 2px;
+        transition: all 0.3s ease-in-out;
+        font-size: 0.85rem;
+    }
+
+    .top-tabs .nav-link:hover {
+        background-color: #0d6efd;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(13, 110, 253, 0.2);
+    }
+
+    .top-tabs .nav-link.active {
+        color: #0d6efd;
+        background-color: #e7f1ff;
+        font-weight: bold;
+    }
+    
+    .top-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+    }
+    
+    .top-tabs::-webkit-scrollbar {
+        height: 4px;
+    }
+    .top-tabs::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 4px;
+    }
+
+    /* small helper */
+    .muted-small { 
+      color:#6c757d; 
+      font-size:.85rem; 
+      font-weight: 500;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* Card titles */
+    .card-ghost h5, .card-ghost h6 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .card-ghost h5 {
+      font-size: 1.1rem;
+    }
+
+    .card-ghost h6 {
+      font-size: 1rem;
+    }
+
+    /* responsive tweaks */
+    @media (max-width: 991px){
+      .sidebar-fixed {
+        position: relative;
+        width: 100%;
+        top: 0;
+        margin-bottom: 20px;
+        height: auto;
+        overflow: visible;
+      }
+      
+      .main-content-fixed {
+        margin-left: 0;
+        padding-top: 10px;
+      }
+      
+      body {
+        padding-top: 180px; /* مساحة أكبر للشاشات الصغيرة */
+      }
+      
+      .navbar-fixed .d-flex {
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      
+      .navbar-fixed input.form-control {
+        width: 150px !important;
+        margin-right: 5px !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 200px; /* مساحة أكبر للشاشات الصغيرة جداً */
+      }
+      
+      .top-tabs .nav-link {
+        padding: 6px 8px;
+        font-size: 0.8rem;
+      }
+      
+      .card-ghost {
+        padding: 15px !important;
+      }
+      
+      .gauge-container {
+        width: 80px;
+        height: 40px;
+      }
+      
+      .gauge-container::after {
+        width: 70px;
+        height: 35px;
+      }
+      
+      .table-responsive {
+        font-size: 0.85rem;
+      }
+      
+      .row > div {
+        margin-bottom: 10px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .navbar-fixed .d-flex {
+        justify-content: center;
+        margin-top: 10px;
+      }
+      
+      .navbar-fixed input.form-control {
+        width: 100% !important;
+        margin-bottom: 10px;
+      }
+      
+      .top-tabs .nav-link span {
+        display: none;
+      }
+      
+      .top-tabs .nav-link i {
+        margin-right: 0;
+      }
+      
+      .card-ghost h5, .card-ghost h6 {
+        font-size: 1rem;
+      }
+      
+      .muted-small {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Usage Summary Grid */
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .usage-item {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #dee2e6;
+    }
+
+    .usage-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .usage-item-title {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .usage-item-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0d6efd;
+    }
+
+    .usage-item-details {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    .usage-item-status {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status-active {
+      background: #d1f2eb;
+      color: #27ae60;
+    }
+
+    .status-inactive {
+      background: #fdebd0;
+      color: #e67e22;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR / TOP - ثابت -->
+  <nav class="navbar navbar-fixed navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">CIM Application</a>
+
+      <div class="d-flex align-items-center gap-2">
+        <input class="form-control form-control-sm me-2" style="width:200px" placeholder="Search by MSISDN / Passport">
+        <button class="btn btn-outline-secondary btn-sm">Passport</button>
+        <button class="btn btn-outline-secondary btn-sm">Emirates ID</button>
+        <button class="btn btn-outline-secondary btn-sm">GCC ID</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- TOP ICON TABS - ثابت -->
+  <div class="topbar topbar-fixed border-bottom">
+    <div class="container-fluid">
+      <ul class="nav top-tabs align-items-center justify-content-center"> 
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-house-door me-2"></i><span>Home</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#"><i class="bi bi-compass me-2"></i><span>360</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-person me-2"></i><span>Profile</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-receipt me-2"></i><span>Billing</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-chat-dots me-2"></i><span>Interaction</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-globe me-2"></i><span>Web Base</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-phone me-2"></i><span>Mobile</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-cart-check me-2"></i><span>Q-Orders</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-bar-chart-line me-2"></i><span>Usage</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-exclamation-circle me-2"></i><span>Complaint</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-star me-2"></i><span>USP</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SIDEBAR - ثابت مع تمرير داخلي -->
+  <aside class="sidebar-fixed sidebar px-3">
+    <div class="accordion" id="sidebarAccordion">
+
+      <!-- Customer Information -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingCustomerInfo">
+          <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCustomerInfo" aria-expanded="true" aria-controls="collapseCustomerInfo">
+            Customer Information
+          </button>
+        </h2>
+        <div id="collapseCustomerInfo" class="accordion-collapse collapse show" aria-labelledby="headingCustomerInfo" data-bs-parent="#sidebarAccordion">
+          <div class="accordion-body p-2">
+
+            <!-- Customer Profile -->
+            <div class="accordion" id="customerProfileAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingCustomerProfile">
+                  <button class="accordion-button fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCustomerProfile" aria-expanded="true" aria-controls="collapseCustomerProfile">
+                    Customer Profile
+                  </button>
+                </h2>
+                <div id="collapseCustomerProfile" class="accordion-collapse collapse show" aria-labelledby="headingCustomerProfile" data-bs-parent="#customerProfileAccordion">
+                  <div class="accordion-body p-2">
+                    <ul class="list-unstyled small">
+                      <li>English Name: <strong>JOHN DOE</strong></li>
+                      <li>Arabic Name: <strong>جون دو</strong></li>
+                      <li>Party English Name: <strong>JOHN D.</strong></li>
+                      <li>Party Arabic Name: <strong>جون د.</strong></li>
+                      <li>Preferred Language: <strong>English</strong></li>
+                      <li>Emirate: <strong>DUBAI</strong></li>
+                      <li>Nationality: <strong>UAE</strong></li>
+                      <li>Party ID: <strong>99887766</strong></li>
+                      <li>DOB: <strong>15-07-1985</strong></li>
+                      <li>Category: <strong>Residential</strong></li>
+                      <li>Segment: <strong>Consumer</strong></li>
+                      <li>MNP Status: <strong>Active</strong></li>
+                      <li>Customer Segment: <span class="badge bg-secondary">CONSUMER</span></li>
+                      <li>Consumer Value Segment: <span class="badge bg-secondary">GOLD</span></li>
+                      <li>Business Value Segment: <span class="badge bg-secondary">—</span></li>
+                      <li>Main Vertical: <strong>Telecom</strong></li>
+                      <li>Vertical: <strong>Mobile</strong></li>
+                      <li>Residential Status: <strong>Verified</strong></li>
+                      <li>Customer ID: <strong>12345678</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Account Information -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingAccountInfo">
+                  <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAccountInfo" aria-expanded="false" aria-controls="collapseAccountInfo">
+                    Account Information
+                  </button>
+                </h2>
+                <div id="collapseAccountInfo" class="accordion-collapse collapse" aria-labelledby="headingAccountInfo" data-bs-parent="#customerProfileAccordion">
+                  <div class="accordion-body p-2">
+                    <ul class="list-unstyled small">
+                      <li>Account Number: <strong>0555123456</strong></li>
+                      <li>Account ID: <strong>987654321</strong></li>
+                      <li>Account Status: <strong>Active</strong></li>
+                      <li>Account Suffix: <strong>2</strong></li>
+                      <li>PIN Available: <strong>Y</strong></li>
+                      <li>Number Status: <strong>Active</strong></li>
+                      <li>BEIN User Name: <strong>user123</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Contact Information -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingContactInfo">
+                  <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContactInfo" aria-expanded="false" aria-controls="collapseContactInfo">
+                    Contact Information
+                  </button>
+                </h2>
+                <div id="collapseContactInfo" class="accordion-collapse collapse" aria-labelledby="headingContactInfo" data-bs-parent="#customerProfileAccordion">
+                  <div class="accordion-body p-2">
+                    <ul class="list-unstyled small">
+                      <li>Alternate Contact Number: <strong>0501122334</strong></li>
+                      <li>eBill Email: <strong>johndoe@example.com</strong></li>
+                      <li>City: <strong>ABU DHABI</strong></li>
+                      <li>POBOX: <strong>123456</strong></li>
+                      <li>Home Country Number: <strong>—</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Documents Registration -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingDocuments">
+                  <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDocuments" aria-expanded="false" aria-controls="collapseDocuments">
+                    Documents Registration
+                  </button>
+                </h2>
+                <div id="collapseDocuments" class="accordion-collapse collapse" aria-labelledby="headingDocuments" data-bs-parent="#customerProfileAccordion">
+                  <div class="accordion-body p-2">
+                    <ul class="list-unstyled small">
+                      <li>Registration Status: <strong>Completed</strong></li>
+                      <li>Document Type: <strong>UAE Identity Card</strong></li>
+                      <li>Document ID: <strong>123456789012345</strong></li>
+                      <li>Registration Expiry Date: <strong>01-03-2030 12:00:00 AM</strong></li>
+                      <li>COMS: <strong>—</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Product Information -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingProductInfo">
+                  <button class="accordion-button fw-semibold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProductInfo" aria-expanded="false" aria-controls="collapseProductInfo">
+                    Product Information
+                  </button>
+                </h2>
+                <div id="collapseProductInfo" class="accordion-collapse collapse" aria-labelledby="headingProductInfo" data-bs-parent="#customerProfileAccordion">
+                  <div class="accordion-body p-2">
+                    <ul class="list-unstyled small">
+                      <li>Product Code: <strong>42</strong></li>
+                      <li>Product Description: <strong>GSW Post Paid</strong></li>
+                      <li>Product Group Code: <strong>N</strong></li>
+                      <li>Product Group Description: <strong>MOBILE Products</strong></li>
+                      <li>Package Description: <strong>GSW Basic Package</strong></li>
+                      <li>Service Type: <strong>—</strong></li>
+                      <li>Platform: <strong>—</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div> <!-- end of customerProfileAccordion -->
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Online Details -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOnline">
+          <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOnline" aria-expanded="false" aria-controls="collapseOnline">
+            Online Details
+          </button>
+        </h2>
+        <div id="collapseOnline" class="accordion-collapse collapse" aria-labelledby="headingOnline" data-bs-parent="#sidebarAccordion">
+          <div class="accordion-body p-2">
+            <!-- فارغة -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Smiles -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingSmiles">
+          <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSmiles" aria-expanded="false" aria-controls="collapseSmiles">
+            Smiles
+          </button>
+        </h2>
+        <div id="collapseSmiles" class="accordion-collapse collapse" aria-labelledby="headingSmiles" data-bs-parent="#sidebarAccordion">
+          <div class="accordion-body p-2">
+            <ul class="list-unstyled small">
+              <li>Tier Level: <strong>Silver</strong></li>
+              <li>Smiles Points: <strong>1749</strong></li>
+              <li>Expiring Points: <strong>249</strong></li>
+              <li>Expiring On: <strong>31-05-2027</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT - يتحرك تحت العناصر الثابتة -->
+  <div class="main-content-fixed">
+    <div class="container-fluid">
+      <main class="col-lg-12">
+
+        <!-- 1. Customer Profile -->
+        <div class="card card-ghost p-3">
+          <h5>👤 Customer Profile</h5>
+          <div class="row">
+            <div class="col-md-4">
+              <span class="muted-small">Last Activity Date</span>
+              <div class="fw-bold">Tue Dec 02 00:00:00 GST 2025</div>
+            </div>
+            <div class="col-md-4">
+              <span class="muted-small">Activation Date</span>
+              <div class="fw-bold">Sun Apr 17 00:00:00 GST 2016</div>
+            </div>
+            <div class="col-md-4">
+              <span class="muted-small">Account Status</span>
+              <div class="status-badge active-status">ACTIVE</div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-4">
+              <span class="muted-small">Custom Account Status</span>
+              <div class="status-badge installed-status">Installed</div>
+            </div>
+            <div class="col-md-4">
+              <span class="muted-small">Credit Status</span>
+              <div class="status-badge active-status">Active</div>
+            </div>
+            <div class="col-md-4">
+              <span class="muted-small">Verification Status</span>
+              <div class="status-badge verified-status">OWNER VERIFIED</div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-4">
+              <span class="muted-small">Upload Speed</span>
+              <div class="fw-bold">FAIC Whitelisted</div>
+            </div>
+            <div class="col-md-4">
+              <span class="muted-small">Deposit Amount / Roaming Service</span>
+              <div class="fw-bold">—</div>
+            </div>
+            <div class="col-md-4">
+              <span class="muted-small">FAIC Verification status</span>
+              <div class="fw-bold">PROFESSIONAL SINGLE</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Billing Summary -->
+        <div class="card card-ghost p-3">
+          <h5>💰 Billing Summary</h5>
+          <p class="mb-2 text-muted small">Deducted amounts (prepaid) and billed amounts (postpaid) are inclusive of 5% VAT according to VAT law.</p>
+          <div class="row">
+            <div class="col-md-3">
+              <span class="muted-small">Amount Due (As Of Now)</span>
+              <div class="fw-bold">288.75 AED</div>
+            </div>
+            <div class="col-md-3">
+              <span class="muted-small">Invoice Charges</span>
+              <div class="fw-bold">288.75 AED</div>
+            </div>
+            <div class="col-md-3">
+              <span class="muted-small">Previous Month Charge</span>
+              <div class="fw-bold">288.75 AED</div>
+            </div>
+            <div class="col-md-3">
+              <span class="muted-small">Current Written Off Balance</span>
+              <div class="fw-bold">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Recent Requests ---- Recent Complaints -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-ghost h-100 p-3">
+              <h6>📜 Recent Requests</h6>
+              <div class="table-responsive">
+                <table class="table mb-0 table-striped">
+                  <thead>
+                    <tr>
+                      <th>SR Type</th>
+                      <th>Status</th>
+                      <th>Created Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Add Service</td>
+                      <td><span class="status-badge closed-status">CLOSE</span></td>
+                      <td>02-11-2025</td>
+                    </tr>
+                    <tr>
+                      <td>Replacement of Sim Cards</td>
+                      <td><span class="status-badge closed-status">CLOSE</span></td>
+                      <td>02-11-2025</td>
+                    </tr>
+                    <tr>
+                      <td>Mobile file registration</td>
+                      <td><span class="status-badge closed-status">CLOSE</span></td>
+                      <td>02-11-2025</td>
+                    </tr>
+                    <tr>
+                      <td>Change primary account</td>
+                      <td><span class="status-badge closed-status">CLOSE</span></td>
+                      <td>23-10-2024</td>
+                    </tr>
+                    <tr>
+                      <td>Add Service</td>
+                      <td><span class="status-badge closed-status">CLOSE</span></td>
+                      <td>03-09-2024</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-ghost h-100 p-3">
+              <h6>📣 Recent Complaints</h6>
+              <div class="table-responsive">
+                <table class="table mb-0 table-striped">
+                  <thead>
+                    <tr>
+                      <th>Details</th>
+                      <th>ID</th>
+                      <th>Status</th>
+                      <th>Created Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="4" class="text-center text-muted py-3">No records found.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Recent Interaction ---- Recent Payments -->
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <div class="card card-ghost h-100 p-3">
+              <h6>💬 Recent Interactions</h6>
+              <div class="table-responsive">
+                <table class="table mb-0 table-striped">
+                  <thead>
+                    <tr>
+                      <th>Time Stamp</th>
+                      <th>Dir.</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>10-12-2025 02:25 PM</td>
+                      <td>OUT</td>
+                      <td>CNS_SERVICE</td>
+                    </tr>
+                    <tr>
+                      <td>10-12-2025 01:25 PM</td>
+                      <td>OUT</td>
+                      <td>Loyalty</td>
+                    </tr>
+                    <tr>
+                      <td>09-12-2025 09:30 PM</td>
+                      <td>IN</td>
+                      <td>PUSH</td>
+                    </tr>
+                    <tr>
+                      <td>09-12-2025 11:15 AM</td>
+                      <td>IN</td>
+                      <td>CALL CENTER</td>
+                    </tr>
+                    <tr>
+                      <td>08-12-2025 03:45 PM</td>
+                      <td>OUT</td>
+                      <td>SMS NOTIFICATION</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-ghost h-100 p-3">
+              <h6>💳 Recent Payments</h6>
+              <div class="table-responsive">
+                <table class="table mb-0 table-striped">
+                  <thead>
+                    <tr>
+                      <th>Ref Number</th>
+                      <th>Amount</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1022012</td>
+                      <td>288.75 AED</td>
+                      <td>25-10-2025</td>
+                      <td><span class="status-badge active-status">PROCESSED</span></td>
+                    </tr>
+                    <tr>
+                      <td>3823</td>
+                      <td>150.00 AED</td>
+                      <td>13-11-2023</td>
+                      <td><span class="status-badge active-status">PROCESSED</span></td>
+                    </tr>
+                    <tr>
+                      <td>2825</td>
+                      <td>100.00 AED</td>
+                      <td>03-09-2025</td>
+                      <td><span class="status-badge active-status">PROCESSED</span></td>
+                    </tr>
+                    <tr>
+                      <td>—</td>
+                      <td>75.50 AED</td>
+                      <td>03-11-2024</td>
+                      <td><span class="status-badge active-status">PROCESSED</span></td>
+                    </tr>
+                    <tr>
+                      <td>—</td>
+                      <td>200.00 AED</td>
+                      <td>01-02-2025</td>
+                      <td><span class="status-badge active-status">PROCESSED</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Usage Summary (البيانات الكاملة لكل باقات/سعات) -->
+        <div class="card card-ghost p-3 mt-3">
+          <h6>📊 Usage Summary (All Packages/Capacities)</h6>
+          
+          <!-- Gauges Row -->
+          <div class="row text-center mb-4">
+            <div class="col-md-3 col-6 mb-3">
+              <span class="muted-small">Data Soft Cap - ROAMING</span>
+              <div class="gauge-container" title="Consumed: 0 B | Remaining: 999 RED">
+                <div class="gauge-fill" style="transform: rotate(0deg);"></div>
+                <div class="gauge-text">0%</div>
+              </div>
+              <div class="fw-bold small">Total: 999 RED</div>
+              <span class="usage-item-status status-active">ACTIVE</span>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+              <span class="muted-small">2GB Offer - LOCAL</span>
+              <div class="gauge-container" title="Consumed: 0 BYTE | Remaining: 2 GB">
+                <div class="gauge-fill" style="transform: rotate(0deg);"></div>
+                <div class="gauge-text">0%</div>
+              </div>
+              <div class="fw-bold small">Total: 2 GB</div>
+              <span class="usage-item-status status-active">ACTIVE</span>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+              <span class="muted-small">Data Add-on - LOCAL</span>
+              <div class="gauge-container" title="Consumed: 541.6 MB | Remaining: 15.46 GB">
+                <div class="gauge-fill" style="transform: rotate(12.2deg);"></div>
+                <div class="gauge-text">3%</div>
+              </div>
+              <div class="fw-bold small">Total: 16 GB</div>
+              <span class="usage-item-status status-active">ACTIVE</span>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+              <span class="muted-small">VoLTE Policy</span>
+              <div class="display-6 fw-bold text-primary">VoLTE</div>
+              <span class="usage-item-status status-active">ACTIVE</span>
+            </div>
+          </div>
+
+          <hr>
+
+         
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS + Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.4/font/bootstrap-icons.css">
+
+  <script>
+    // Place for small JS helpers if needed
+    document.querySelectorAll('table tbody tr').forEach(row=>{
+      row.addEventListener('click', e=>{
+        if(e.target.tagName.toLowerCase() === 'input') return;
+        row.classList.toggle('table-active');
+      });
+    });
+  </script>
+</body>
+</html>
